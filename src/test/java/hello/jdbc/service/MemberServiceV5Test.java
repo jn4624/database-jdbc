@@ -2,7 +2,7 @@ package hello.jdbc.service;
 
 import hello.jdbc.domain.Member;
 import hello.jdbc.repository.MemberRepository;
-import hello.jdbc.repository.MemberRepositoryV4;
+import hello.jdbc.repository.MemberRepositoryV5;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
@@ -19,14 +19,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 /**
- * 예외 누수 문제 해결
- * SQLException 제거
- *
- * MemberRepository 인터페이스 의존
+ * SQLExceptionTranslator 추가
  */
 @Slf4j
 @SpringBootTest
-class MemberServiceV4Test {
+class MemberServiceV5Test {
     public static final String MEMBER_A = "memberA";
     public static final String MEMBER_B = "memberB";
     public static final String MEMBER_EX = "ex";
@@ -53,7 +50,7 @@ class MemberServiceV4Test {
 
         @Bean
         MemberRepository memberRepository() {
-            return new MemberRepositoryV4(dataSource);
+            return new MemberRepositoryV5(dataSource);
         }
 
         @Bean
